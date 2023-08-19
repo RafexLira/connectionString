@@ -1,0 +1,117 @@
+
+
+
+/////////////////////////////////// EXEMPLO DE SCRIPT PARA COMUNICAÇÃO COM DB SQL SERVER
+
+using System;
+using System.Data.SqlClient;
+
+namespace ExemploBancoDados
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectionString = "Data Source=NomeDoServidor;Initial Catalog=NomeDoBanco;User ID=Usuario;Password=Senha";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sql = "SELECT Nome, Idade FROM Pessoas";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"Nome: {reader["Nome"]}, Idade: {reader["Idade"]}");
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/////////////////////////////////////////////////
+
+using System;
+using System.Data.SqlClient;
+
+namespace ExemploBancoDados
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectionString = "Data Source=NomeDoServidor;Initial Catalog=NomeDoBanco;User ID=Usuario;Password=Senha";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sql = "INSERT INTO Pessoas (Nome, Idade) VALUES ('João', 25)";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                    Console.WriteLine($"{rowsAffected} linha(s) inserida(s)");
+                }
+            }
+        }
+    }
+}
+
+/////////////////////////////////////////////////
+
+using System;
+using System.Data.SqlClient;
+
+namespace ExemploBancoDados
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectionString = "Data Source=NomeDoServidor;Initial Catalog=NomeDoBanco;User ID=Usuario;Password=Senha";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sql = "UPDATE Pessoas SET Idade = 26 WHERE Nome = 'João'";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                    Console.WriteLine($"{rowsAffected} linha(s) atualizada(s)");
+                }
+            }
+        }
+    }
+}
+
+//////////////////////////////////////////////
+
+using System;
+using System.Data.SqlClient;
+
+namespace ExemploBancoDados
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectionString = "Data Source=NomeDoServidor;Initial Catalog=NomeDoBanco;User ID=Usuario;Password=Senha";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sql = "DELETE FROM Pessoas WHERE Nome = 'João'";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                    Console.WriteLine($"{rowsAffected} linha(s) deletada(s)");
+                }
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////
+
